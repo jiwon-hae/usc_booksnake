@@ -1,4 +1,4 @@
-package com.usc.booksnake.ui.theme
+package com.usc.booksnake.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

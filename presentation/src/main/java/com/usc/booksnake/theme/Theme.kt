@@ -1,4 +1,4 @@
-package com.usc.booksnake.ui.theme
+package com.usc.booksnake.theme
 
 import android.app.Activity
 import android.os.Build

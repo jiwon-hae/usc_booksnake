@@ -1,4 +1,4 @@
-package com.usc.booksnake
+package com.usc.booksnake.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.usc.booksnake.ui.theme.BooksnakeTheme
+import com.usc.booksnake.theme.BooksnakeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
