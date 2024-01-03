@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.List
@@ -58,8 +62,8 @@ fun ListsScreen(
         }
         Column(
             modifier = Modifier
-                //.verticalScroll(rememberScrollState())
-                .background(color = Color.Gray, shape = RoundedCornerShape(10))
+                .verticalScroll(rememberScrollState())
+                .background(color = Color.Gray, shape = RoundedCornerShape(5))
                 .padding(horizontal = 10.dp, vertical = 5.dp)
 
         ) {
@@ -76,13 +80,13 @@ fun ListsButton(label: String, icon: ImageVector, onClick: () -> Unit) {
         modifier = Modifier
             .clickable(onClick = onClick)
             .background(Color.Blue, shape = RoundedCornerShape(40))
-            .padding(horizontal = 15.dp, vertical = 10.dp)
+            .padding(horizontal = 15.dp, vertical = 15.dp)
     ) {
         Icon(imageVector = icon, contentDescription = null, tint = Color.White)
         Spacer(modifier = Modifier.width(5.dp))
         Text(
             label,
-            fontSize = 10.sp,
+            fontSize = 15.sp,
             color = Color.White,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
@@ -91,9 +95,13 @@ fun ListsButton(label: String, icon: ImageVector, onClick: () -> Unit) {
 
 @Composable
 fun ListItem(bookList: BookList) {
-    Row {
+    Row(modifier = Modifier
+        .height(120.dp)
+        .padding(vertical = 10.dp)) {
         LazyVerticalGrid(
-            modifier = Modifier.weight(0.3f),
+            modifier = Modifier
+                .weight(0.3f)
+                .align(Alignment.CenterVertically),
             columns = GridCells.Fixed(2),
             contentPadding = PaddingValues(5.dp),
             userScrollEnabled = false
@@ -105,24 +113,32 @@ fun ListItem(bookList: BookList) {
                 )
             }
         }
-        Column(modifier = Modifier.weight(0.6f)) {
-            Text(bookList.title)
-            Text(bookList.subTitle)
-            Row(modifier = Modifier.align(Alignment.End)){
+        Spacer(modifier = Modifier.weight(0.025f))
+        Column(
+            modifier = Modifier
+                .weight(0.55f)
+        ) {
+            Text(bookList.title, fontSize = 18.sp, color = Color.White)
+            Text(modifier = Modifier.weight(1f), text = bookList.subTitle, fontSize = 15.sp, color = Color.LightGray)
+            Row {
                 Icon(
                     imageVector = Icons.Filled.Person,
                     contentDescription = null
                 )
-                Text(bookList.creator)
+                Spacer(modifier = Modifier.width(1.dp))
+                Text(bookList.creator, color = Color.White)
             }
         }
-        IconButton(modifier = Modifier.weight(0.1f), onClick = { /*TODO*/ }) {
+        Spacer(modifier = Modifier.weight(0.025f))
+        IconButton(
+            modifier = Modifier
+                .weight(0.1f)
+                .align(Alignment.CenterVertically),
+            onClick = { /*TODO*/ }) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowRight,
                 contentDescription = null
             )
         }
-
     }
-
 }

@@ -16,7 +16,7 @@ class ListsViewModel @Inject constructor() : ViewModel() {
     val listsUiState: StateFlow<ListsUiState> = _listsUiState.asStateFlow()
 
     fun getBookLists() {
-        val dummyBookList = List(1) {
+        val dummyBookList = List(3) {
             BookList(
                 title = "ListTitle$it",
                 subTitle = "ListSubTitle$it",
