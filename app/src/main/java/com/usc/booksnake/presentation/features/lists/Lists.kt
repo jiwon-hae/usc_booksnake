@@ -108,6 +108,7 @@ fun ListItem(bookList: BookList) {
         ) {
             items(4) { index ->
                 AsyncImage(
+                    modifier = Modifier.size(50.dp),
                     model = "https://www.freecovermaker.com/wp-content/uploads/2021/07/Vogue-magazine-cover-3.jpeg",
                     contentDescription = ""
                 )

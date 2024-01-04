@@ -14,6 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "booksnake"
-include(":presentation")
-include(":data")
-include(":domain")
+include(":app")
