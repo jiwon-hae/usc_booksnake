@@ -24,15 +24,20 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,10 +50,12 @@ import com.usc.booksnake.presentation.features.library.LibraryScreen
 import com.usc.booksnake.presentation.features.lists.ListsScreen
 import com.usc.booksnake.presentation.features.widgets.Title
 import com.usc.booksnake.presentation.model.UiTabItem
+import com.usc.booksnake.presentation.theme.Background
 import com.usc.booksnake.presentation.theme.BookSnakeTheme
+import com.usc.booksnake.presentation.theme.Secondary
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -63,16 +70,19 @@ fun HomeScreen(
     }
 
     Scaffold(
+        contentColor = Background,
+        containerColor = Background,
         topBar = { HomeTopBar(modifier, pagerState) },
         bottomBar = { HomeBottomBar(pagerState = pagerState) },
         content = { padding ->
             Surface(
-                modifier = Modifier.padding(
-                    top = padding.calculateTopPadding(),
-                    bottom = padding.calculateBottomPadding(),
-                    start = 10.dp,
-                    end = 10.dp
-                )
+                modifier = Modifier
+                    .padding(
+                        top = padding.calculateTopPadding(),
+                        bottom = padding.calculateBottomPadding(),
+                        start = 10.dp,
+                        end = 10.dp
+                    )
             ) {
                 HomeContent(
                     pagerState = pagerState
@@ -92,7 +102,9 @@ private fun HomeContent(
         contentPadding = PaddingValues(0.dp),
         state = pagerState, userScrollEnabled = false
     ) { pageIndex: Int ->
-        Column {
+        Column(
+            modifier = Modifier.background(Background)
+        ) {
             Title(title = UiTabItem.entries[pageIndex].name)
             when (pageIndex) {
                 UiTabItem.Library.ordinal -> LibraryScreen()
@@ -111,13 +123,15 @@ private fun HomeContent(
 fun HomeTopBar(modifier: Modifier, pagerState: PagerState) {
     val context = LocalContext.current
     TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = Background),
         title = { }, actions = {
             if (pagerState.currentPage == 0) {
                 IconButton(
                     onClick = { /* do something */ }) {
                     Icon(
                         imageVector = Icons.Filled.Info,
-                        contentDescription = "Localized description"
+                        contentDescription = "Localized description",
+                        tint = Secondary
                     )
                 }
             }
@@ -127,7 +141,7 @@ fun HomeTopBar(modifier: Modifier, pagerState: PagerState) {
                     "Report a bug",
                     Toast.LENGTH_LONG
                 )
-            }, text = "Report a Bug")
+            }, text = "Report a Bug", color = Secondary)
         })
 }
 
@@ -142,10 +156,17 @@ fun HomeBottomBar(pagerState: PagerState) {
         UiTabItem.Explore
     )
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = Background,
+    ){
         tabs.forEachIndexed { index, tab ->
             NavigationBarItem(
                 selected = pagerState.currentPage == index,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = Secondary,
+                    selectedTextColor = Secondary,
+                    indicatorColor = Color.Transparent
+                ),
                 onClick = {
                     coroutineScope.launch {
                         pagerState.scrollToPage(

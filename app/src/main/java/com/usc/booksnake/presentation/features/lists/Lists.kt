@@ -35,6 +35,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.usc.booksnake.domain.entity.BookList
+import com.usc.booksnake.presentation.theme.Background
+import com.usc.booksnake.presentation.theme.OnSurface
+import com.usc.booksnake.presentation.theme.Secondary
+import com.usc.booksnake.presentation.theme.Surface
 
 @Composable
 fun ListsScreen(
@@ -46,7 +50,9 @@ fun ListsScreen(
     val bookLists = listsState.value.bookLists
 
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(Background),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -63,7 +69,7 @@ fun ListsScreen(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .background(color = Color.Gray, shape = RoundedCornerShape(5))
+                .background(color = Surface, shape = RoundedCornerShape(5))
                 .padding(horizontal = 10.dp, vertical = 5.dp)
 
         ) {
@@ -79,7 +85,7 @@ fun ListsButton(label: String, icon: ImageVector, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .clickable(onClick = onClick)
-            .background(Color.Blue, shape = RoundedCornerShape(40))
+            .background(Secondary, shape = RoundedCornerShape(20))
             .padding(horizontal = 15.dp, vertical = 15.dp)
     ) {
         Icon(imageVector = icon, contentDescription = null, tint = Color.White)
@@ -95,9 +101,11 @@ fun ListsButton(label: String, icon: ImageVector, onClick: () -> Unit) {
 
 @Composable
 fun ListItem(bookList: BookList) {
-    Row(modifier = Modifier
-        .height(120.dp)
-        .padding(vertical = 10.dp)) {
+    Row(
+        modifier = Modifier
+            .height(120.dp)
+            .padding(vertical = 10.dp)
+    ) {
         LazyVerticalGrid(
             modifier = Modifier
                 .weight(0.3f)
@@ -120,11 +128,17 @@ fun ListItem(bookList: BookList) {
                 .weight(0.55f)
         ) {
             Text(bookList.title, fontSize = 18.sp, color = Color.White)
-            Text(modifier = Modifier.weight(1f), text = bookList.subTitle, fontSize = 15.sp, color = Color.LightGray)
+            Text(
+                modifier = Modifier.weight(1f),
+                text = bookList.subTitle,
+                fontSize = 15.sp,
+                color = Color.LightGray
+            )
             Row {
                 Icon(
                     imageVector = Icons.Filled.Person,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.White
                 )
                 Spacer(modifier = Modifier.width(1.dp))
                 Text(bookList.creator, color = Color.White)
@@ -138,7 +152,8 @@ fun ListItem(bookList: BookList) {
             onClick = { /*TODO*/ }) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowRight,
-                contentDescription = null
+                contentDescription = null,
+                tint = OnSurface
             )
         }
     }

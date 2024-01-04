@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.usc.booksnake.presentation.theme.Tertiary
 
 @Composable
 fun ExploreScreen(
@@ -42,7 +44,7 @@ fun LibraryOfCongressButton() {
     TextButton(
         modifier = Modifier
             .background(
-                color = Color.Red,
+                color = Tertiary,
                 shape = RoundedCornerShape(15)
             )
             .height(height = 150.dp)
