@@ -72,8 +72,8 @@ fun HomeScreen(
     Scaffold(
         contentColor = Background,
         containerColor = Background,
-        topBar = { HomeTopBar(modifier, pagerState) },
-        bottomBar = { HomeBottomBar(pagerState = pagerState) },
+        topBar = { HomeTopBar(modifier) },
+        bottomBar = { HomeBottomBar() },
         content = { padding ->
             Surface(
                 modifier = Modifier
@@ -120,21 +120,21 @@ private fun HomeContent(
     ExperimentalFoundationApi::class
 )
 @Composable
-fun HomeTopBar(modifier: Modifier, pagerState: PagerState) {
+fun HomeTopBar(modifier: Modifier) {
     val context = LocalContext.current
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Background),
         title = { }, actions = {
-            if (pagerState.currentPage == 0) {
-                IconButton(
-                    onClick = { /* do something */ }) {
-                    Icon(
-                        imageVector = Icons.Filled.Info,
-                        contentDescription = "Localized description",
-                        tint = Secondary
-                    )
-                }
-            }
+//            if (pagerState.currentPage == 0) {
+//                IconButton(
+//                    onClick = { /* do something */ }) {
+//                    Icon(
+//                        imageVector = Icons.Filled.Info,
+//                        contentDescription = "Localized description",
+//                        tint = Secondary
+//                    )
+//                }
+//            }
             Text(modifier = modifier.clickable {
                 Toast.makeText(
                     context,
@@ -147,7 +147,7 @@ fun HomeTopBar(modifier: Modifier, pagerState: PagerState) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeBottomBar(pagerState: PagerState) {
+fun HomeBottomBar() {
     val coroutineScope = rememberCoroutineScope()
 
     val tabs = listOf(
@@ -161,7 +161,7 @@ fun HomeBottomBar(pagerState: PagerState) {
     ){
         tabs.forEachIndexed { index, tab ->
             NavigationBarItem(
-                selected = pagerState.currentPage == index,
+                selected = index == 0,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = Secondary,
                     selectedTextColor = Secondary,
@@ -169,9 +169,9 @@ fun HomeBottomBar(pagerState: PagerState) {
                 ),
                 onClick = {
                     coroutineScope.launch {
-                        pagerState.scrollToPage(
-                            index
-                        )
+//                        pagerState.scrollToPage(
+//                            index
+//                        )
                     }
                 },
                 icon = {

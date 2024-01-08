@@ -17,7 +17,7 @@
         android:theme="@style/Theme.BookSnake.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.features.MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             >

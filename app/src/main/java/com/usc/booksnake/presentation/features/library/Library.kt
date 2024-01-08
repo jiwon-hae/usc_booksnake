@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -30,6 +31,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.usc.booksnake.domain.entity.Book
 import com.usc.booksnake.presentation.features.widgets.SubTitle
+import com.usc.booksnake.presentation.theme.Background
 import com.usc.booksnake.presentation.theme.OnSurface
 import com.usc.booksnake.presentation.theme.Surface
 
@@ -42,7 +44,9 @@ fun LibraryScreen(
     val books = viewModel.libraryState.collectAsState().value.books
 
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(Background),
     ) {
         Spacer(modifier = modifier.height(10.dp))
         SubTitle(subtitle = "library")
