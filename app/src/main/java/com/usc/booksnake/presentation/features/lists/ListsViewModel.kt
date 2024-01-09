@@ -24,8 +24,17 @@ class ListsViewModel @Inject constructor() : ViewModel() {
                 itemList = List(2) {
                     Book(
                         title = "title_$it",
-                        author = "author_$it",
-                        image = "image_$it"
+                        contributor = "author_$it",
+                        imageUrl = "image_$it",
+                        image = emptyList(),
+                        originalFormat = "newspaper",
+                        subjects = listOf(
+                            "inyo county", "newspaper", "japanese"
+                        ),
+                        createdPublished = "Manzanar, Calif, July 3, 1943",
+                        onlineFormat = listOf(
+                            "image", "pdf", "online text"
+                        ),
                     )
                 }
             )
