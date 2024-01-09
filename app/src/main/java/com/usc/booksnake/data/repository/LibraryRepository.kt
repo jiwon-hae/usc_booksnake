@@ -9,8 +9,6 @@ class LibraryRepositoryImpl @Inject constructor(
     private val remoteDataSource : LibraryRemoteDataSource
 ) : LibraryRepository {
     override fun getBooks(): List<Book> {
-        return List(remoteDataSource.getBooks().size) { index ->
-            Book("title$index", author = "auth$index", image = "image$index")
-        }
+        return emptyList()
     }
 }
