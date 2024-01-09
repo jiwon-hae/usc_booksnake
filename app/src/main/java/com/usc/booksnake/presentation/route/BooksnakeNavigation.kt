@@ -2,11 +2,13 @@ package com.usc.booksnake.presentation.route
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.EnterTransition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +26,7 @@ import androidx.navigation.navArgument
 import com.usc.booksnake.domain.entity.Book
 import com.usc.booksnake.presentation.features.home.HomeScreen
 import com.usc.booksnake.presentation.features.library.screen.LibraryDetailItem
+import com.usc.booksnake.presentation.theme.Surface
 import com.usc.booksnake.util.customGetSerializable
 import java.io.Serializable
 
@@ -93,6 +96,7 @@ fun BookSnakeNavigationGraph(
     ) {
         composable(
             BookSnakeRoute.HOME,
+            enterTransition = { EnterTransition.None },
             arguments = listOf(navArgument("tab") { type = NavType.StringType })
         ) { backStackEntry ->
             val selectedTab = BookSnakeHomeTab.valueOf(
@@ -100,13 +104,17 @@ fun BookSnakeNavigationGraph(
                     ?.replaceFirstChar { it.uppercase() }
                     ?: BookSnakeHomeTab.Library.name
             )
+
             HomeScreen(
                 navigateToDestination = navigateToDestination,
                 selectedTab = selectedTab
             )
         }
 
-        composable(BookSnakeRoute.LIBRARY_DETAIL) { backStackEntry ->
+        composable(
+            BookSnakeRoute.LIBRARY_DETAIL,
+            enterTransition = { EnterTransition.None }
+        ) { backStackEntry ->
             LibraryDetailItem(
                 onBackPressed = {
                     navController.navigate(BookSnakeHomeTabRoute.Library)
